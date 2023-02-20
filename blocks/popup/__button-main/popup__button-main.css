@@ -1,0 +1,29 @@
+.popup__button-main[type='button'] {
+  width: 100%;
+  min-height: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 1);
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  transition: background-color 1.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.popup__button-main[type='button']:hover,
+.popup__button-main[type='button']:focus {
+  background-color: rgba(0, 0, 0, .8);
+}
+
+@media screen and (max-width: 619px) {
+  .popup__button-main[type='button'] {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

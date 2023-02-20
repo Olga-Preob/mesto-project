@@ -1,0 +1,3 @@
+.card__like-button_active[type='button'] {
+  background-image: url(../../../../images/icons/icon-like-fill.svg);
+}

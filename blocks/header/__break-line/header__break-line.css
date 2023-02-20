@@ -1,0 +1,7 @@
+.header__break-line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #545454;
+  opacity: .7;
+}

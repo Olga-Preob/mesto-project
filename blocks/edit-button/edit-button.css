@@ -1,0 +1,24 @@
+.edit-button[type='button'] {
+  box-sizing: border-box;
+  display: block;
+  min-width: 24px;
+  height: 24px;
+  background-image: url(../../images/icons/icon-edit.svg);
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #fff;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 619px ) {
+  .edit-button[type='button'] {
+    min-width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+  }
+}

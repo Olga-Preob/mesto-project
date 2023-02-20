@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="body">
+  <div class="page">
+    <header class="header header__space">
+      <img class="header__logo" src="./images/logo/logo.svg" alt="Логотип социальной сети Место">
+      <span class="header__break-line"></span>
+    </header>
+
+    <main class="content content__space">
+      <section class="profile">
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар автора профиля">
+        <div class="profile__info">
+          <form class="profile__form-edit-button">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="edit-button button-effects" type="button" tabindex="0"></button>
+          </form>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+
+        <form class="profile__form-add-button">
+          <button class="add-button button-effects" type="button"></button>
+        </form>
+      </section>
+
+      <section class="image-board">
+        <ul class="image-board__list">
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-01.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Карачаевск</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button card__like-button_active" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-02.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-03.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Домбай</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-02.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-03.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Домбай</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+
+          <li class="image-board__item">
+            <figure class="card image-board__card">
+              <img class="card__image" src="./images/user-photo-01.jpg" alt="Фотография от автора профиля">
+              <figcaption class="card__caption">
+                <h2 class="card__title">Карачаево-Черкесия</h2>
+                <form class="card__form image-board__form">
+                  <button class="card__like-button" type="button"></button>
+                </form>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer footer__space">
+      <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+      <div class="popup__container">
+        <form class="popup__form">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <fieldset class="popup__input-container">
+            <input class="popup__item" type="text" id="profile-title" name="profile-title" placeholder="Жак-Ив Кусто" autofocus required>
+            <input class="popup__item" type="text" id="profile-subtitle" name="profile-subtitle" placeholder="Исследователь океана" required>
+          </fieldset>
+
+          <fieldset class="popup__handlers">
+            <button class="popup__button-main" type="button">Сохранить</button>
+            <button class="popup__button-close button-effects" type="button"></button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

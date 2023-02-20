@@ -1,0 +1,12 @@
+.profile__form-edit-button {
+  display: flex;
+  align-items: baseline;
+  gap: 0 18px;
+}
+
+@media screen and (max-width: 619px ) {
+  .profile__form-edit-button {
+    justify-content: center;
+    gap: 0 10px;
+  }
+}

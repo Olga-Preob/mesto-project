@@ -1,0 +1,5 @@
+@media screen and (max-width: 850px) and (min-width: 330px) {
+  .image-board__card {
+    height: 440px;
+  }
+}

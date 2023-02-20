@@ -1,0 +1,9 @@
+.footer__space {
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 619px) {
+  .footer__space {
+    margin-bottom: 36px;
+  }
+}

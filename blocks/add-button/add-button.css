@@ -1,4 +1,4 @@
-.add-button[type='button'] {
+.add-button {
   box-sizing: border-box;
   display: block;
   width: 150px;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: 619px ) {
-  .add-button[type='button'] {
+  .add-button {
     width: 100%;
     background-size: 16px 16px;
   }

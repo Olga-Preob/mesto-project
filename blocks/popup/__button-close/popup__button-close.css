@@ -1,4 +1,4 @@
-.popup__button-close[type='button'] {
+.popup__button-close {
   position: absolute;
   display: block;
   width: 32px;
@@ -18,7 +18,7 @@
 }
 
 @media screen and (max-width: 619px) {
-  .popup__button-close[type='button'] {
+  .popup__button-close {
     width: 20px;
     height: 20px;
     top: -36px;

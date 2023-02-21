@@ -1,4 +1,4 @@
-.card__like-button[type='button'] {
+.card__like-button {
   display: block;
   width: 22px;
   height: 19px;
@@ -14,7 +14,7 @@
   transition: opacity .8s ease;
 }
 
-.card__like-button[type='button']:hover,
-.card__like-button[type='button']:focus {
+.card__like-button:hover,
+.card__like-button:focus {
   opacity: .5;
 }

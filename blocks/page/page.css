@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   min-width: 320px;
+  min-height: 100vh;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   -moz-osx-font-smoothing: grayscale;

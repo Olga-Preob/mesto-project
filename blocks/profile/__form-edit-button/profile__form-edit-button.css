@@ -8,5 +8,6 @@
   .profile__form-edit-button {
     justify-content: center;
     gap: 0 10px;
+    margin-left: 28px;
   }
 }

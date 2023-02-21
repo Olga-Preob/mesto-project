@@ -1,4 +1,4 @@
-.edit-button[type='button'] {
+.edit-button {
   box-sizing: border-box;
   display: block;
   min-width: 24px;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 619px ) {
-  .edit-button[type='button'] {
+  .edit-button {
     min-width: 18px;
     height: 18px;
     background-size: 7.5px 7.5px;

@@ -1,8 +1,8 @@
-.button-effects[type='button'] {
+.button-effects {
   transition: opacity .8s ease;
 }
 
-.button-effects[type='button']:hover,
-.button-effects[type='button']:focus {
+.button-effects:hover,
+.button-effects:focus {
   opacity: .6;
 }

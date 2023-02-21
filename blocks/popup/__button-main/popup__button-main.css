@@ -1,4 +1,4 @@
-.popup__button-main[type='button'] {
+.popup__button-main {
   width: 100%;
   min-height: 50px;
   cursor: pointer;
@@ -16,13 +16,14 @@
   padding: 0;
 }
 
-.popup__button-main[type='button']:hover,
-.popup__button-main[type='button']:focus {
+.popup__button-main:hover,
+.popup__button-main:focus {
   background-color: rgba(0, 0, 0, .8);
 }
 
 @media screen and (max-width: 619px) {
-  .popup__button-main[type='button'] {
+  .popup__button-main {
+    min-height: 46px;
     font-size: 14px;
     line-height: 17px;
   }

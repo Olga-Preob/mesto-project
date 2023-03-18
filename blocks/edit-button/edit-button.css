@@ -1,5 +1,6 @@
 .edit-button {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: block;
   min-width: 24px;
   height: 24px;
@@ -8,11 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
-  cursor: pointer;
   border: 1px solid #fff;
-  outline: none;
-  padding: 0;
-  margin: 0;
 }
 
 @media screen and (max-width: 619px ) {

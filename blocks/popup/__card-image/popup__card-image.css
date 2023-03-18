@@ -1,0 +1,15 @@
+.popup__card-image {
+  display: block;
+  max-width: 75vw;
+  max-height: 75vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+@media screen and (max-width: 426px) {
+  .popup__card-image {
+    min-height: 299px;
+  }
+}

@@ -1,12 +1,18 @@
 .profile__form-edit-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: baseline;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   gap: 0 18px;
 }
 
 @media screen and (max-width: 619px ) {
   .profile__form-edit-button {
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     gap: 0 10px;
     margin-left: 28px;
   }

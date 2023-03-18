@@ -1,19 +1,16 @@
 .popup__button-main {
   width: 100%;
   min-height: 50px;
-  cursor: pointer;
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
   text-align: center;
   color: #fff;
   background-color: rgba(0, 0, 0, 1);
-  border: none;
-  outline: none;
   border-radius: 2px;
+  -webkit-transition: background-color 1.3s ease;
+  -o-transition: background-color 1.3s ease;
   transition: background-color 1.3s ease;
-  margin: 0;
-  padding: 0;
 }
 
 .popup__button-main:hover,

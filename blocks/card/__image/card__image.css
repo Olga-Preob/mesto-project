@@ -1,9 +1,11 @@
 .card__image {
   display: block;
   width: 100%;
-  height: calc(100% - 79px);
-  min-height: 282px;
   border-radius: 10px 10px 0 0;
-  object-fit: cover;
-  object-position: center;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }

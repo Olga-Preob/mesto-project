@@ -15,78 +15,19 @@
 
     <main class="content page__content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="Мужчина на фоне голубого моря широко улыбается в камеру.">
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="Мужчина на фоне голубого моря широко улыбается в камеру." rel="noopener noreferrer">
         <div class="profile__info">
           <div class="profile__form-edit-button">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="edit-button button-effects" type="button" tabindex="0"></button>
+            <button class="button button-effects edit-button" type="button" tabindex="0"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="add-button button-effects" type="button"></button>
+        <button class="button button-effects add-button" type="button"></button>
       </section>
 
       <section class="image-board" aria-label="Раздел с фотографиями от Аавтора">
         <ul class="image-board__list">
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-01.jpg" alt="Старинный полуразрушенный храм на фоне высоких гор, усеянных деревьями.">
-              <div class="card__caption">
-                <h2 class="card__title">Карачаевск</h2>
-                <button class="card__like-button card__like-button_active" type="button"></button>
-              </div>
-            </article>
-          </li>
-
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-02.jpg" alt="Величественная гора Эльбрус на фоне розового заката.">
-              <div class="card__caption">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-03.jpg" alt="Высокие заснеженные горы в хмурую погоду.">
-              <div class="card__caption">
-                <h2 class="card__title">Домбай</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-02.jpg" alt="Величественная гора Эльбрус на фоне розового заката.">
-              <div class="card__caption">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-03.jpg" alt="Высокие заснеженные горы в хмурую погоду.">
-              <div class="card__caption">
-                <h2 class="card__title">Домбай</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
-
-          <li class="image-board__item">
-            <article class="card">
-              <img class="card__image" src="./images/user-photo-01.jpg" alt="Старинный полуразрушенный храм на фоне высоких гор, усеянных деревьями.">
-              <div class="card__caption">
-                <h2 class="card__title">Карачаево-Черкесия</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </article>
-          </li>
         </ul>
       </section>
     </main>
@@ -95,22 +36,62 @@
       <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_background_light-dark popup_form_profile-edit">
       <div class="popup__container">
         <form class="popup__form" name="profile-edit">
           <h3 class="popup__title">Редактировать профиль</h3>
           <fieldset class="popup__input-container">
-            <input class="popup__item" type="text" id="profile-title" name="profile-title" placeholder="Жак-Ив Кусто" autofocus required>
-            <input class="popup__item" type="text" id="profile-subtitle" name="profile-subtitle" placeholder="Исследователь океана" required>
+            <input class="popup__item popup__item_user_name" type="text" placeholder="Жак-Ив Кусто" required>
+            <input class="popup__item popup__item_user_job" type="text" placeholder="Исследователь океана" required>
           </fieldset>
 
           <fieldset class="popup__handlers">
-            <button class="popup__button-main" type="submit">Сохранить</button>
-            <button class="popup__button-close button-effects" type="button"></button>
+            <button class="button popup__button-main" type="submit">Сохранить</button>
+            <button class="button button-effects popup__button-close" type="button"></button>
           </fieldset>
         </form>
       </div>
     </div>
+
+    <div class="popup popup_background_light-dark popup_form_new-card">
+      <div class="popup__container">
+        <form class="popup__form" name="new-card">
+          <h3 class="popup__title">Новое место</h3>
+          <fieldset class="popup__input-container">
+            <input class="popup__item popup__item_image_name" type="text" placeholder="Название" required>
+            <input class="popup__item popup__item_image_link" type="text" placeholder="Ссылка на картинку" required>
+          </fieldset>
+
+          <fieldset class="popup__handlers">
+            <button class="button popup__button-main" type="submit">Создать</button>
+            <button class="button button-effects popup__button-close" type="button"></button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_background_dark popup_form_image">
+      <div class="popup__container-image">
+        <img class="popup__card-image" src="#" alt="#">
+        <h2 class="popup__card-title">#</h2>
+        <button class="button button-effects popup__button-close" type="button"></button>
+      </div>
+    </div>
   </div>
+
+  <template id="card-template">
+    <li class="image-board__item" src="" alt="">
+      <article class="card">
+        <img class="card__image">
+        <button class="button button-effects card__delete-button" type="button"></button>
+        <div class="card__caption">
+          <h2 class="card__title"></h2>
+          <button class="button card__like-button" type="button"></button>
+        </div>
+      </article>
+    </li>
+  </template>
+
+  <script src="./index.js"></script>
 </body>
 </html>

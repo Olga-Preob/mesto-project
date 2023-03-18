@@ -1,7 +1,8 @@
 .button-effects {
-  transition: opacity .8s ease;
+  -webkit-transition: opacity 1.2s ease;
+  -o-transition: opacity 1.2s ease;
+  transition: opacity 1.2s ease;
 }
-
 .button-effects:hover,
 .button-effects:focus {
   opacity: .6;

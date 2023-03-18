@@ -3,7 +3,8 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
@@ -15,6 +16,8 @@
     text-align: center;
     font-size: 14px;
     line-height: 17px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }

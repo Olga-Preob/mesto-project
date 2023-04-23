@@ -1,8 +1,0 @@
-.card__title {
-  color: #000;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin: 0;
-}

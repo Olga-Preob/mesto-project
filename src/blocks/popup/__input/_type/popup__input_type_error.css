@@ -1,0 +1,4 @@
+.popup__input_type_error,
+.popup__input_type_error:focus {
+  border-color: rgba(255, 0, 0, 1);
+}

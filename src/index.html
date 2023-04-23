@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+</head>
+
+<body class="body">
+  <div class="page">
+    <header class="header page__header">
+      <img class="header__logo" src="<%=require('./images/logo/logo.svg')%>" alt="Логотип проекта Место.">
+    </header>
+
+    <main class="content page__content">
+      <section class="profile">
+        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фотография профиля пользователя.">
+        <div class="profile__info">
+          <div class="profile__form-edit-button">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="button button-effects edit-button call-popup" type="button" tabindex="0"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="button button-effects add-button call-popup" type="button"></button>
+      </section>
+
+      <section class="image-board" aria-label="Раздел с фотографиями">
+        <ul class="image-board__list">
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer page__footer">
+      <p class="footer__copyright">&copy;&nbsp;2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup popup_background_light-dark popup_type_edit">
+      <div class="popup__container">
+        <form class="popup__form popup__form_type_edit" novalidate>
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <fieldset class="popup__fieldset popup__input-container">
+            <input
+              class="popup__input"
+              id="name-input"
+              type="text"
+              placeholder="Имя"
+              minlength="2"
+              maxlength="40"
+              pattern="^[а-яА-Яa-zA-Z\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              required>
+            <span class="popup__error name-input-error"></span>
+            <input
+              class="popup__input"
+              id="job-input"
+              type="text"
+              placeholder="О себе"
+              minlength="2"
+              maxlength="200"
+              pattern="^[а-яА-Яa-zA-Z\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              required>
+            <span class="popup__error job-input-error"></span>
+          </fieldset>
+
+          <fieldset class="popup__fieldset popup__handlers">
+            <button class="button popup__button" type="submit">Сохранить</button>
+            <button class="button button-effects popup__button-close" type="button"></button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_background_light-dark popup_type_add">
+      <div class="popup__container">
+        <form class="popup__form popup__form_type_add" novalidate>
+          <h3 class="popup__title">Новое место</h3>
+          <fieldset class="popup__fieldset popup__input-container">
+            <input
+              class="popup__input"
+              id="image-name-input"
+              type="text"
+              placeholder="Название"
+              minlength="2"
+              maxlength="30"
+              pattern="^[а-яА-Яa-zA-Z\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              required>
+            <span class="popup__error image-name-input-error"></span>
+            <input
+              class="popup__input"
+              id="image-link-input"
+              type="url"
+              placeholder="Ссылка на картинку"
+              required>
+            <span class="popup__error image-link-input-error"></span>
+          </fieldset>
+
+          <fieldset class="popup__fieldset popup__handlers">
+            <button class="button popup__button" type="submit">Создать</button>
+            <button class="button button-effects popup__button-close" type="button"></button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_background_dark popup_type_open-image">
+      <div class="popup__container-image">
+        <img class="popup__card-image">
+        <h2 class="popup__card-title"></h2>
+        <button class="button button-effects popup__button-close" type="button"></button>
+      </div>
+    </div>
+  </div>
+
+  <template id="card-template">
+    <li class="image-board__item">
+      <article class="card">
+        <img class="card__image" src="" alt="">
+        <button class="button button-effects card__delete-button" type="button"></button>
+        <div class="card__caption">
+          <h2 class="card__title"></h2>
+          <button class="button card__like-button" type="button"></button>
+        </div>
+      </article>
+    </li>
+  </template>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.popup__input-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 0;
+  margin: 0;
+}

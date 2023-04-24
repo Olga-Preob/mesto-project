@@ -1,11 +1,21 @@
 import './pages/index.css';
 
-const allPopups = document.querySelectorAll('.popup');
-const openButtons = document.querySelectorAll('.call-popup');
-const editPopup = document.querySelector('.popup_type_edit');
-const addPopup = document.querySelector('.popup_type_add');
-const editFormSubmitButton = editForm.querySelector('.popup__button');
-const addFormSubmitButton = addForm.querySelector('.popup__button');
+const popupList = document.querySelectorAll('.popup');
+const popupAdd = document.querySelector('.popup_type_add');
+const formAdd = document.querySelector('.popup__form_type_add');
+const buttonOpenEdit = document.querySelector('.edit-button');
+const buttonSubmitFormAdd = formAdd.querySelector('.popup__button');
+const popupEdit = document.querySelector('.popup_type_edit');
+const formEdit = document.querySelector('.popup__form_type_edit');
+const buttonOpenAdd = document.querySelector('.add-button');
+const buttonSubmitFormEdit = formEdit.querySelector('.popup__button');
+const cardsContainer = document.querySelector('.image-board__list');
+const userName = document.querySelector('.profile__title');
+const userJob = document.querySelector('.profile__subtitle');
+const imageNameInput = formAdd.querySelector('#image-name-input');
+const imageLinkInput = formAdd.querySelector('#image-link-input');
+const userNameInput = formEdit.querySelector('#name-input');
+const userJobInput = formEdit.querySelector('#job-input');
 const initialCards = [
   {
     name: 'Байкал',
@@ -33,49 +43,56 @@ const initialCards = [
   }
 ];
 
-import { addForm, editForm, cardsContainer, userName, userJob, imageNameInput, imageLinkInput, userNameInput, userJobInput, openPopup, closePopup, submitAddForm, submitEditForm } from './components/modal.js';
-import { cardTemplate, imagePopup, imageName, imageLink, createCard } from './components/card.js';
-import { resetForm, resetInputError } from './components/utils.js';
-import { showInputError, hideInputError, hasInvalidInput, checkInputValidity, toggleButtonState, setEventListeners, enableValidation } from './components/validate.js';
+import { createCard } from './components/card.js';
+import { openPopup, closePopup, closePopupOnClick } from './components/modal.js';
+import { resetForm } from './components/utils.js';
+import { hideAllInputErrorsInForm, enableValidation } from './components/validate.js';
+
+function openPopupAdd() {
+  buttonSubmitFormAdd.setAttribute('disabled', true);
+  buttonSubmitFormAdd.classList.add('popup__button_disabled');
+  hideAllInputErrorsInForm(formAdd);
+  resetForm(formAdd);
+  openPopup(popupAdd);
+}
+
+function openPopupEdit() {
+  buttonSubmitFormEdit.removeAttribute('disabled');
+  buttonSubmitFormEdit.classList.remove('popup__button_disabled');
+  hideAllInputErrorsInForm(formEdit);
+  userNameInput.value = userName.textContent;
+  userJobInput.value = userJob.textContent;
+  openPopup(popupEdit);
+}
+
+function submitFormAdd(evt) {
+  evt.preventDefault();
+  cardsContainer.prepend(createCard(imageNameInput.value, imageLinkInput.value));
+  resetForm(formAdd);
+  closePopup(popupAdd);
+}
+
+function submitFormEdit(evt) {
+  evt.preventDefault();
+  userName.textContent = userNameInput.value;
+  userJob.textContent = userJobInput.value;
+  closePopup(popupEdit);
+}
 
 initialCards.forEach((item) => {
   cardsContainer.prepend(createCard(item.name, item.link));
 });
 
-openButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (button.classList.contains('edit-button')) {
-      editFormSubmitButton.removeAttribute('disabled');
-      editFormSubmitButton.classList.remove('popup__button_disabled');
-      resetInputError(editForm);
-      userNameInput.value = userName.textContent;
-      userJobInput.value = userJob.textContent;
-      openPopup(editPopup);
-    } else if (button.classList.contains('add-button')) {
-      addFormSubmitButton.setAttribute('disabled', true);
-      addFormSubmitButton.classList.add('popup__button_disabled');
-      resetInputError(addForm);
-      resetForm(addForm);
-      openPopup(addPopup);
-    }
-  });
-});
+buttonOpenEdit.addEventListener('click', openPopupEdit);
 
-addForm.addEventListener('submit', submitAddForm);
-editForm.addEventListener('submit', submitEditForm);
+buttonOpenAdd.addEventListener('click', openPopupAdd);
 
-allPopups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if ((evt.target.classList.contains('popup__button-close')) || (evt.target.classList.contains('popup'))) {
-      closePopup(popup);
-    }
-  });
+formAdd.addEventListener('submit', submitFormAdd);
 
-  document.addEventListener('keydown', (evt) => {
-    if ((evt.key === 'Escape') && (popup.classList.contains('popup_opened'))) {
-      closePopup(popup);
-    }
-  });
+formEdit.addEventListener('submit', submitFormEdit);
+
+popupList.forEach((popup) => {
+  popup.addEventListener('click', closePopupOnClick);
 });
 
 enableValidation({

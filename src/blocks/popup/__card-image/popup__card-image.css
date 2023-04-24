@@ -5,9 +5,3 @@
   object-fit: cover;
   object-position: center;
 }
-
-@media screen and (max-width: 426px) {
-  .popup__card-image {
-    min-height: 299px;
-  }
-}

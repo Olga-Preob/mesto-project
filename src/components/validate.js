@@ -12,6 +12,12 @@ function hideInputError(formElement, inputElement, {inputErrorClass, errorClass}
   errorElement.textContent = '';
 }
 
+function hideAllInputErrorsInForm(form) {
+  form.querySelectorAll('.popup__input').forEach((inputElement) => {
+    hideInputError(form, inputElement, {inputErrorClass: 'popup__input_type_error', errorClass: 'popup__error_visible'})
+  });
+}
+
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -72,4 +78,4 @@ function enableValidation({formSelector, inputSelector, submitButtonSelector, in
   });
 }
 
-export { showInputError, hideInputError, hasInvalidInput, checkInputValidity, toggleButtonState, setEventListeners, enableValidation };
+export { hideAllInputErrorsInForm, enableValidation };

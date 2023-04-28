@@ -3,6 +3,9 @@
   grid-template-columns: min-content 1fr min-content;
   align-items: center;
   gap: 0 30px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .6s linear, opacity .6s linear;
 }
 
 @media screen and (max-width: 619px ) {

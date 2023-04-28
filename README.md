@@ -10,7 +10,9 @@ HTML 5
 CSS 3   
 JavaScript
 
+### GitHub Pages
+https://olga-preob.github.io/mesto-project-ghpages/
+
 ### Авторы
 Реализация - Преображенская Оля   
 Дизайн - Яндекс Практикум
-

@@ -24,68 +24,46 @@ const userJobInput = formEdit.querySelector('#job-input');
 const avatarLinkInput = formChangeAvatar.querySelector('#avatar-link-input');
 const userProfile = document.querySelector('.profile');
 const imageBoardList = document.querySelector('.image-board__list');
+const settingsForValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
 
-import { getInfoAboutCurrentUser, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo } from './components/api.js';
+import { getUserInfo, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo } from './components/api.js';
 import { createCard } from './components/card.js';
 import { openPopup, closePopup, closePopupOnClick } from './components/modal.js';
 import { changeVisibility, resetForm } from './components/utils.js';
 import { hideAllInputErrorsInForm, enableValidation } from './components/validate.js';
 
-async function getUserProfileInfo(userNameElement, userJobElement, userAvatarElement) {
+function getUserProfileInfo(userNameElement, userJobElement, userAvatarElement) {
   userName.textContent = userNameElement;
   userJob.textContent = userJobElement;
   userAvatar.setAttribute('src', userAvatarElement);
 }
-
-async function renderUserProfile() {
-  changeVisibility(true, userProfile);
-  changeVisibility(true, imageBoardList);
-  await getInfoAboutCurrentUser()
-          .then((userInfo) => {
-            getUserProfileInfo(userInfo.name, userInfo.about, userInfo.avatar)
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-  await getInitialCards()
-          .then((arrCards) => {
-            arrCards.forEach((card) => {
-              cardsContainer.append(createCard(card.name, card.link, card.likes, card.owner._id, card._id));
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => {
-            changeVisibility(false, userProfile);
-            changeVisibility(false, imageBoardList);
-          });
-}
-
 function openPopupChangeAvatar() {
-  buttonSubmitFormChangeAvatar.textContent = 'Сохранить';
   buttonSubmitFormChangeAvatar.setAttribute('disabled', true);
   buttonSubmitFormChangeAvatar.classList.add('popup__button_disabled');
-  hideAllInputErrorsInForm(formChangeAvatar);
+  hideAllInputErrorsInForm(formChangeAvatar, settingsForValidation);
   resetForm(formChangeAvatar);
   openPopup(popupChangeAvatar);
 }
 
 function openPopupAdd() {
-  buttonSubmitFormAdd.textContent = 'Создать';
   buttonSubmitFormAdd.setAttribute('disabled', true);
   buttonSubmitFormAdd.classList.add('popup__button_disabled');
-  hideAllInputErrorsInForm(formAdd);
+  hideAllInputErrorsInForm(formAdd, settingsForValidation);
   resetForm(formAdd);
   openPopup(popupAdd);
 }
 
 function openPopupEdit() {
-  buttonSubmitFormEdit.textContent = 'Сохранить';
   buttonSubmitFormEdit.removeAttribute('disabled');
   buttonSubmitFormEdit.classList.remove('popup__button_disabled');
-  hideAllInputErrorsInForm(formEdit);
+  hideAllInputErrorsInForm(formEdit, settingsForValidation);
   userNameInput.value = userName.textContent;
   userJobInput.value = userJob.textContent;
   openPopup(popupEdit);
@@ -97,15 +75,15 @@ function submitFormChangeAvatar(evt) {
   sendNewAvatarCurrentUser(avatarLinkInput.value)
     .then((userInfo) => {
       getUserProfileInfo(userInfo.name, userInfo.about, userInfo.avatar);
+      closePopup(popupChangeAvatar);
+      resetForm(formChangeAvatar);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      buttonSubmitFormChangeAvatar.textContent = 'Сохранено';
-      closePopup(popupChangeAvatar);
+      buttonSubmitFormChangeAvatar.textContent = 'Сохранить';
     });
-  resetForm(formChangeAvatar);
 }
 
 function submitFormAdd(evt) {
@@ -114,15 +92,15 @@ function submitFormAdd(evt) {
   sendNewCardInfo(imageNameInput.value, imageLinkInput.value)
     .then((cardNew) => {
       cardsContainer.prepend(createCard(cardNew.name, cardNew.link, cardNew.likes, cardNew.owner._id, cardNew._id));
+      closePopup(popupAdd);
+      resetForm(formAdd);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      buttonSubmitFormAdd.textContent = 'Создано';
-      closePopup(popupAdd);
+      buttonSubmitFormAdd.textContent = 'Создать';
     });
-  resetForm(formAdd);
 }
 
 function submitFormEdit(evt) {
@@ -130,18 +108,31 @@ function submitFormEdit(evt) {
   buttonSubmitFormEdit.textContent = 'Сохранение...';
   sendNewInfoCurrentUser(userNameInput.value, userJobInput.value)
     .then((infoNew) => {
-      getUserProfileInfo(infoNew.name, infoNew.about, infoNew.avatar)
+      getUserProfileInfo(infoNew.name, infoNew.about, infoNew.avatar);
+      closePopup(popupEdit);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      buttonSubmitFormEdit.textContent = 'Сохранено';
-      closePopup(popupEdit);
+      buttonSubmitFormEdit.textContent = 'Сохранить';
     });
 }
 
-renderUserProfile();
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([userInfo, initialCards]) => {
+    getUserProfileInfo(userInfo.name, userInfo.about, userInfo.avatar);
+    initialCards.forEach((card) => {
+      cardsContainer.append(createCard(card.name, card.link, card.likes, card.owner._id, card._id));
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    changeVisibility(false, userProfile);
+    changeVisibility(false, imageBoardList);
+  })
 
 buttonOpenChangeAvatar.addEventListener('click', openPopupChangeAvatar);
 
@@ -159,11 +150,4 @@ popupList.forEach((popup) => {
   popup.addEventListener('click', closePopupOnClick);
 });
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
+enableValidation(settingsForValidation);

@@ -12,9 +12,9 @@ function hideInputError(formElement, inputElement, {inputErrorClass, errorClass}
   errorElement.textContent = '';
 }
 
-function hideAllInputErrorsInForm(form) {
-  form.querySelectorAll('.popup__input').forEach((inputElement) => {
-    hideInputError(form, inputElement, {inputErrorClass: 'popup__input_type_error', errorClass: 'popup__error_visible'})
+function hideAllInputErrorsInForm(formElement, {inputSelector, inputErrorClass, errorClass}) {
+  formElement.querySelectorAll(inputSelector).forEach((inputElement) => {
+    hideInputError(formElement, inputElement, {inputErrorClass, errorClass});
   });
 }
 

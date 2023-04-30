@@ -1,3 +1,10 @@
+function getResponseData(res) {
+  if (!res.ok) {
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  }
+  return res.json();
+}
+
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
   headers: {
@@ -6,18 +13,20 @@ const config = {
   }
 }
 
-const getInfoAboutCurrentUser = () => {
+const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'GET',
     headers: config.headers
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+  .then((res) => {
+    return getResponseData(res);
+  })
+}
+
+const getUserId = () => {
+  return getUserInfo().then((userInfo) => {
+    return userInfo._id;
+  });
 }
 
 const getInitialCards = () => {
@@ -26,11 +35,7 @@ const getInitialCards = () => {
     headers: config.headers
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
@@ -43,11 +48,7 @@ const sendNewAvatarCurrentUser = (avatarNew) => {
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
@@ -61,11 +62,7 @@ const sendNewInfoCurrentUser = (userName, userAbout) => {
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
@@ -79,11 +76,7 @@ const sendNewCardInfo = (imageName, imageLink) => {
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
@@ -93,11 +86,7 @@ const requestDeleteCard = (cardId) => {
     headers: config.headers
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
@@ -107,12 +96,8 @@ const requestLikeCard = (likeMethod, cardId) => {
     headers: config.headers
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
+      return getResponseData(res);
     })
 }
 
-export { getInfoAboutCurrentUser, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo, requestDeleteCard, requestLikeCard }
+export { getUserInfo, getUserId, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo, requestDeleteCard, requestLikeCard }

@@ -23,12 +23,6 @@ const getUserInfo = () => {
   })
 }
 
-const getUserId = () => {
-  return getUserInfo().then((userInfo) => {
-    return userInfo._id;
-  });
-}
-
 const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'GET',
@@ -100,4 +94,4 @@ const requestLikeCard = (likeMethod, cardId) => {
     })
 }
 
-export { getUserInfo, getUserId, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo, requestDeleteCard, requestLikeCard }
+export { getUserInfo, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo, requestDeleteCard, requestLikeCard }

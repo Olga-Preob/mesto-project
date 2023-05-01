@@ -32,6 +32,7 @@ const settingsForValidation = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 }
+let userId;
 
 import { getUserInfo, getInitialCards, sendNewAvatarCurrentUser, sendNewInfoCurrentUser, sendNewCardInfo } from './components/api.js';
 import { createCard } from './components/card.js';
@@ -44,6 +45,7 @@ function getUserProfileInfo(userNameElement, userJobElement, userAvatarElement) 
   userJob.textContent = userJobElement;
   userAvatar.setAttribute('src', userAvatarElement);
 }
+
 function openPopupChangeAvatar() {
   buttonSubmitFormChangeAvatar.setAttribute('disabled', true);
   buttonSubmitFormChangeAvatar.classList.add('popup__button_disabled');
@@ -121,6 +123,7 @@ function submitFormEdit(evt) {
 
 Promise.all([getUserInfo(), getInitialCards()])
   .then(([userInfo, initialCards]) => {
+    userId = userInfo._id;
     getUserProfileInfo(userInfo.name, userInfo.about, userInfo.avatar);
     initialCards.forEach((card) => {
       cardsContainer.append(createCard(card.name, card.link, card.likes, card.owner._id, card._id));
@@ -151,3 +154,5 @@ popupList.forEach((popup) => {
 });
 
 enableValidation(settingsForValidation);
+
+export { userId }

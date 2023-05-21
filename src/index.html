@@ -46,26 +46,26 @@
           <fieldset class="popup__fieldset popup__input-container">
             <input
               class="popup__input"
-              id="name-input"
+              id="nameInput"
               type="text"
               placeholder="Имя"
               minlength="2"
               maxlength="40"
               pattern="^[а-яА-Яa-zA-Z\-\u{2014}\u{2013}\sёЁ]+$"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
               required>
-            <span class="popup__error name-input-error"></span>
+            <span class="popup__error nameInput-error"></span>
             <input
               class="popup__input"
-              id="job-input"
+              id="aboutInput"
               type="text"
               placeholder="О себе"
               minlength="2"
               maxlength="200"
               pattern="^[а-яА-Яa-zA-Z\-\u{2014}\u{2013}\sёЁ]+$"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
               required>
-            <span class="popup__error job-input-error"></span>
+            <span class="popup__error aboutInput-error"></span>
           </fieldset>
 
           <fieldset class="popup__fieldset popup__handlers">
@@ -83,22 +83,22 @@
           <fieldset class="popup__fieldset popup__input-container">
             <input
               class="popup__input"
-              id="image-name-input"
+              id="imgNameInput"
               type="text"
               placeholder="Название"
               minlength="2"
               maxlength="30"
               pattern="^[а-яА-Яa-zA-Z\-\u{2014}\u{2013}\sёЁ]+$"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
               required>
-            <span class="popup__error image-name-input-error"></span>
+            <span class="popup__error imgNameInput-error"></span>
             <input
               class="popup__input"
-              id="image-link-input"
+              id="imgLinkInput"
               type="url"
               placeholder="Ссылка на картинку"
               required>
-            <span class="popup__error image-link-input-error"></span>
+            <span class="popup__error imgLinkInput-error"></span>
           </fieldset>
 
           <fieldset class="popup__fieldset popup__handlers">
@@ -116,11 +116,11 @@
           <fieldset class="popup__fieldset popup__input-container">
             <input
               class="popup__input"
-              id="avatar-link-input"
+              id="avaLinkInput"
               type="url"
               placeholder="Ссылка на картинку"
               required>
-            <span class="popup__error avatar-link-input-error"></span>
+            <span class="popup__error avaLinkInput-error"></span>
           </fieldset>
 
           <fieldset class="popup__fieldset popup__handlers">
@@ -137,7 +137,7 @@
           <h3 class="popup__title popup__title_type_question">Вы уверены?</h3>
 
           <fieldset class="popup__fieldset popup__handlers">
-            <button class="button popup__button" type="submit">Да</button>
+            <button class="button popup__button" type="button">Да</button>
             <button class="button button-effects popup__button-close" type="button"></button>
           </fieldset>
         </form>
@@ -153,7 +153,7 @@
     </div>
   </div>
 
-  <template id="card-template">
+  <template class="card-template">
     <li class="image-board__item">
       <article class="card">
         <img class="card__image" src="" alt="">

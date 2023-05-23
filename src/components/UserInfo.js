@@ -9,31 +9,24 @@ export default class UserInfo {
     this._requestUploadAvatar = requestUploadAvatar;
   }
 
-  getUserRequest() {
+  changeUserAvatar(link) {
+    this._avatar.src = link;
+  }
+
+  changeUserInfo(about, name) {
+    this._status.textContent = about;
+    this._name.textContent = name;
+  }
+
+  getUserInfo() {
     return this._requestGetUser();
   }
 
-  setUserRequest({ name, status }) {
-    return this._requestSetInfo({ name, status });
+  setUserAvatar({ avaLinkInput }) {
+    return this._requestUploadAvatar(avaLinkInput);
   }
 
-  setAvatarRequest({link}) {
-    return this._requestUploadAvatar({link});
-  }
-
-
-  getUserInfo(res) {
-    this._avatar.src = res.avatar;
-    this._name.textContent = res.name;
-    this._status.textContent = res.about;
-    sessionStorage.setItem('userId', res._id);
-  }
-
-  setUserInfo(res) {
-    return this._requestSetInfo(res);
-  }
-
-  updateAvatar(res) {
-    this._avatar.src = res.avatar;
+  setUserInfo({ nameInput, aboutInput }) {
+    return this._requestSetInfo({ nameInput, aboutInput });
   }
 }

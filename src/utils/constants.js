@@ -1,7 +1,21 @@
-const selectors = {
-  elements: '.elements',
-  elementTemplate: '#element'
-}
+const popupTypeAdd = document.querySelector('.popup_type_add');
+const popupTypeEdit = document.querySelector('.popup_type_edit');
+const popupTypeChangeAvatar = document.querySelector('.popup_type_change-avatar');
+const popupTypeOpenImg = document.querySelector('.popup_type_open-image');
+const popupTypeConfirm = document.querySelector('.popup_type_confirm');
+const buttonOpenAdd = document.querySelector('.add-button');
+const buttonOpenChangeAvatar = document.querySelector('.change-avatar-button');
+const buttonOpenEdit = document.querySelector('.edit-button');
+const formList = document.querySelectorAll('.popup__form');
+const formEdit = document.querySelector('.popup__form_type_edit');
+const buttonEdit = formEdit.querySelector('.popup__button');
+const inputEditName = formEdit.querySelector('#nameInput');
+const inputEditAbout = formEdit.querySelector('#aboutInput');
+const imageBoardList = document.querySelector('.image-board__list');
+const userProfile = document.querySelector('.profile');
+const userAvatar = document.querySelector('.profile__avatar');
+const userName = document.querySelector('.profile__title');
+const userAbout = document.querySelector('.profile__subtitle');
 
 const popupSelectors = {
   popup: '.popup',
@@ -53,11 +67,33 @@ const settingsForCards = {
   tempLikeCounterSelector:'.card__like-counter',
 }
 
+const visibilityElements = {
+  displayFlexClass: 'display-flex',
+  visibleElement: 'visible-element'
+}
+
 export {
-  selectors,
+  popupTypeAdd,
+  popupTypeEdit,
+  popupTypeChangeAvatar,
+  popupTypeOpenImg,
+  popupTypeConfirm,
+  buttonOpenAdd,
+  buttonOpenChangeAvatar,
+  buttonOpenEdit,
+  buttonEdit,
+  formList,
+  imageBoardList,
+  inputEditName,
+  inputEditAbout,
   popupSelectors,
-  userInfoSelectors,
+  settingsForCards,
   settingsForPopup,
   settingsForValidation,
-  settingsForCards
+  visibilityElements,
+  userInfoSelectors,
+  userProfile,
+  userAvatar,
+  userName,
+  userAbout
 }

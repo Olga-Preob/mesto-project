@@ -12,6 +12,12 @@ const popupSelectors = {
   typeConfirm: '.popup_type_confirm',
 }
 
+const userInfoSelectors = {
+  userNameSelector: '.profile__title',
+  userAboutSelector: '.profile__subtitle',
+  userAvatarSelector: '.profile__avatar',
+}
+
 const settingsForPopup = {
   popupClass: 'popup',
   openedClass: 'popup_opened',
@@ -34,9 +40,24 @@ const settingsForValidation = {
   errorClass: 'popup__error_visible'
 }
 
+const settingsForCards = {
+  likeActiveClass: 'card__like-button_active',
+  binActiveClass: 'card__delete-button_active',
+  cardTemplateSelector: '.card-template',
+  cardElementSelector: '.image-board__item',
+  cardContainerSelector: '.image-board__list',
+  tempNameSelector: '.card__title',
+  tempImgSelector: '.card__image',
+  tempBinSelector: '.card__delete-button',
+  tempLikeSelector: '.card__like-button',
+  tempLikeCounterSelector:'.card__like-counter',
+}
+
 export {
   selectors,
   popupSelectors,
+  userInfoSelectors,
   settingsForPopup,
-  settingsForValidation
+  settingsForValidation,
+  settingsForCards
 }

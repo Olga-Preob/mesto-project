@@ -1,10 +1,24 @@
 export default class UserInfo {
-  constructor(avatar, name, status, {handleSetInfo, handleUploadAvatar}) {
+  constructor(avatar, name, status, {requestGetUser, requestSetInfo, requestUploadAvatar}) {
     this._avatar = avatar;
     this._name = name;
     this._status = status;
-    this._handleSetInfo = handleSetInfo;
-    this._handleUploadAvatar = handleUploadAvatar;
+
+    this._requestGetUser = requestGetUser;
+    this._requestSetInfo = requestSetInfo;
+    this._requestUploadAvatar = requestUploadAvatar;
+  }
+
+  getUserRequest() {
+    return this._requestGetUser();
+  }
+
+  setUserRequest({ name, status }) {
+    return this._requestSetInfo({ name, status });
+  }
+
+  setAvatarRequest({link}) {
+    return this._requestUploadAvatar({link});
   }
 
 
@@ -16,11 +30,10 @@ export default class UserInfo {
   }
 
   setUserInfo(res) {
-    this._handleSetInfo(res);
+    return this._requestSetInfo(res);
   }
 
   updateAvatar(res) {
     this._avatar.src = res.avatar;
-    this._handleUploadAvatar();
   }
 }

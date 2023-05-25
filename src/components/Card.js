@@ -1,14 +1,12 @@
-import { settingsForCards } from '../utils/constants.js';
-
 export default class Card {
-  constructor(cardHandlers, data, userId, selector) {
+  constructor(cardHandlers, data, userId, settings) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._owner = data.owner;
     this._id = data._id;
     this._userId = userId;
-    this._selector = selector;
+    this._settings = settings;
     this._handleCardClick = cardHandlers.handleCardClick;
     this._handleLikeClick = cardHandlers.handleLikeClick;
     this._handleBinClick = cardHandlers.handleBinClick;
@@ -17,9 +15,9 @@ export default class Card {
 
   _getElement() {
     const cardElement = document
-      .querySelector(this._selector)
+      .querySelector(this._settings.cardTemplateSelector)
       .content
-      .querySelector(settingsForCards.cardElementSelector)
+      .querySelector(this._settings.cardElementSelector)
       .cloneNode(true);
 
     return cardElement;
@@ -27,16 +25,16 @@ export default class Card {
 
   _checkBin() {
     if (this._isOwner) {
-      this._binButton.classList.add(settingsForCards.binActiveClass);
+      this._binButton.classList.add(this._settings.binActiveClass);
     }
   }
 
   _checkLike() {
     this._likes.forEach((whoLiked) => {
       if (whoLiked._id === this._userId) {
-        this._likeButton.classList.add(settingsForCards.likeActiveClass);
+        this._likeButton.classList.add(this._settings.likeActiveClass);
       } else {
-        this._likeButton.classList.remove(settingsForCards.likeActiveClass);
+        this._likeButton.classList.remove(this._settings.likeActiveClass);
       }
     })
   }
@@ -47,7 +45,7 @@ export default class Card {
     });
 
     this._likeButton.addEventListener('click', () => {
-      const method = this._likeButton.classList.contains(settingsForCards.likeActiveClass) ? 'DELETE' : 'PUT';
+      const method = this._likeButton.classList.contains(this._settings.likeActiveClass) ? 'DELETE' : 'PUT';
       this._handleLikeClick(method, this._id, this._likeButton, this._likeCounter);
     });
 
@@ -60,11 +58,11 @@ export default class Card {
 
   generate() {
     this._element = this._getElement();
-    this._cardName = this._element.querySelector(settingsForCards.tempNameSelector);
-    this._cardImage = this._element.querySelector(settingsForCards.tempImgSelector);
-    this._binButton = this._element.querySelector(settingsForCards.tempBinSelector);
-    this._likeButton =  this._element.querySelector(settingsForCards.tempLikeSelector);
-    this._likeCounter = this._element.querySelector(settingsForCards.tempLikeCounterSelector);
+    this._cardName = this._element.querySelector(this._settings.tempNameSelector);
+    this._cardImage = this._element.querySelector(this._settings.tempImgSelector);
+    this._binButton = this._element.querySelector(this._settings.tempBinSelector);
+    this._likeButton =  this._element.querySelector(this._settings.tempLikeSelector);
+    this._likeCounter = this._element.querySelector(this._settings.tempLikeCounterSelector);
 
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name + '.';

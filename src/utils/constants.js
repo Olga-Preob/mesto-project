@@ -7,36 +7,18 @@ const buttonOpenAdd = document.querySelector('.add-button');
 const buttonOpenChangeAvatar = document.querySelector('.change-avatar-button');
 const buttonOpenEdit = document.querySelector('.edit-button');
 const formList = document.querySelectorAll('.popup__form');
-const formEdit = document.querySelector('.popup__form_type_edit');
-const buttonEdit = formEdit.querySelector('.popup__button');
-const inputEditName = formEdit.querySelector('#nameInput');
-const inputEditAbout = formEdit.querySelector('#aboutInput');
 const imageBoardList = document.querySelector('.image-board__list');
 const userProfile = document.querySelector('.profile');
 const userAvatar = document.querySelector('.profile__avatar');
 const userName = document.querySelector('.profile__title');
 const userAbout = document.querySelector('.profile__subtitle');
 
-const popupSelectors = {
-  popup: '.popup',
-  typeEdit: '.popup_type_edit',
-  typeAdd: '.popup_type_add',
-  typeChangeAvatar: '.popup_type_change-avatar',
-  typeOpenImage: '.popup_type_open-image',
-  typeConfirm: '.popup_type_confirm',
-}
-
-const userInfoSelectors = {
-  userNameSelector: '.profile__title',
-  userAboutSelector: '.profile__subtitle',
-  userAvatarSelector: '.profile__avatar',
-}
-
 const settingsForPopup = {
   popupClass: 'popup',
   openedClass: 'popup_opened',
   editClass: 'popup_type_edit',
   changeAvaClass: 'popup_type_change-avatar',
+  popupSelector: '.popup',
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -81,17 +63,12 @@ export {
   buttonOpenAdd,
   buttonOpenChangeAvatar,
   buttonOpenEdit,
-  buttonEdit,
   formList,
   imageBoardList,
-  inputEditName,
-  inputEditAbout,
-  popupSelectors,
   settingsForCards,
   settingsForPopup,
   settingsForValidation,
   visibilityElements,
-  userInfoSelectors,
   userProfile,
   userAvatar,
   userName,

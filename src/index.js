@@ -16,13 +16,10 @@ import {
   buttonOpenAdd,
   buttonOpenChangeAvatar,
   buttonOpenEdit,
-  buttonEdit,
   formList,
   imageBoardList,
-  inputEditName,
-  inputEditAbout,
-  popupSelectors,
   settingsForCards,
+  settingsForPopup,
   settingsForValidation,
   visibilityElements,
   userProfile,
@@ -44,7 +41,17 @@ const api = new Api({
 
 const userInfo = new UserInfo(userAvatar, userName, userAbout, {
   requestGetUser: () => {
-    return api.getUserInfo();
+    return api.getUserInfo()
+      .then((res) => {
+        const userData = {
+          nameInput: res.name,
+          aboutInput: res.about,
+          avaLinkInput: res.avatar,
+          _id: res._id
+        };
+        return userData;
+      })
+      .catch((err) => api.errorHandler(err));
   },
   requestSetInfo: ({ nameInput, aboutInput }) => {
     return api.updateUserInfo(nameInput, aboutInput)
@@ -58,9 +65,60 @@ const userInfo = new UserInfo(userAvatar, userName, userAbout, {
   }
 });
 
+const popupChangeAvatar = new PopupWithForm({
+  handleFormSubmit: (inputValues) => {
+    return userInfo.setUserAvatar(inputValues)
+      .then(() => popupChangeAvatar.close())
+      .catch((err) => api.errorHandler(err));
+    }
+  },
+  popupTypeChangeAvatar,
+  settingsForPopup
+);
+
+const popupEdit = new PopupWithForm({
+  handleFormSubmit: (inputValues) => {
+    return userInfo.setUserInfo(inputValues)
+      .then(() => popupEdit.close())
+      .catch((err) => api.errorHandler(err));
+    }
+  },
+  popupTypeEdit,
+  settingsForPopup
+);
+
+const popupAdd = new PopupWithForm({
+  handleFormSubmit: (inputValues) => {
+    return api.addCard(inputValues.imgNameInput, inputValues.imgLinkInput)
+      .then((cardInfo) => {
+        cardList.renderItems([cardInfo]);
+        popupAdd.close();
+      })
+      .catch((err) => api.errorHandler(err));
+    }
+  },
+  popupTypeAdd,
+  settingsForPopup
+);
+
+const popupWithConfirm = new PopupWithConfirm({
+  handleConfirmClick: (cardId, cardMarkup) => {
+    return api.deleteCard(cardId)
+      .then(() => {
+        cardMarkup.remove();
+        popupWithConfirm.close();
+      })
+      .catch((err) => api.errorHandler(err));
+    }
+  },
+  popupTypeConfirm,
+  settingsForPopup
+);
+
+const popupWithImage = new PopupWithImage(popupTypeOpenImg, settingsForPopup);
+
 const cardHandlers = {
   handleCardClick: (evt) => {
-    const popupWithImage = new PopupWithImage(popupTypeOpenImg);
     const evtImage = evt.target;
     popupWithImage.open(evtImage.src, evtImage.alt.slice(0, -1));
   },
@@ -75,73 +133,24 @@ const cardHandlers = {
   },
 
   handleBinClick: (cardId, cardMarkup) => {
-    const popupWithConfirm = new PopupWithConfirm({
-      handleConfirmClick: (cardId, cardMarkup) => {
-        api.deleteCard(cardId)
-          .then(() => {
-            cardMarkup.remove();
-            popupWithConfirm.close();
-          })
-          .catch((err) => api.errorHandler(err))
-          .finally(() => popupWithConfirm.hideLoadingText());
-        }
-      },
-      cardId,
-      cardMarkup,
-      popupTypeConfirm
-    );
+    popupWithConfirm.getData(cardId, cardMarkup);
     popupWithConfirm.open();
   },
 }
 
-function renderCard(items) {
-  const cardList = new Section({
-      data: items,
-      renderer: (item) => {
-        const card = new Card(cardHandlers, item, userId, settingsForCards.cardTemplateSelector);
-        const cardElement = card.generate();
-
-        cardList.setItem(cardElement);
-      }
-    },
-    settingsForCards.cardContainerSelector
-  );
-
-  cardList.renderItems();
+function createCard(item) {
+  const card = new Card(cardHandlers, item, userId, settingsForCards);
+  const cardElement = card.generate();
+  return cardElement;
 }
 
-const popupChangeAvatar = new PopupWithForm({
-  handleFormSubmit: (inputValues) => {
-    userInfo.setUserAvatar(inputValues)
-      .then(() => popupChangeAvatar.close())
-      .catch((err) => api.errorHandler(err))
-      .finally(() => popupChangeAvatar.hideLoadingText());
+const cardList = new Section({
+  renderer: (item) => {
+    cardList.setItem(createCard(item));
+    }
   },
-  popup: popupTypeChangeAvatar
-});
-
-const popupAdd = new PopupWithForm({
-  handleFormSubmit: (inputValues) => {
-    api.addCard(inputValues.imgNameInput, inputValues.imgLinkInput)
-      .then((cardInfo) => {
-        renderCard([cardInfo]);
-        popupAdd.close();
-      })
-      .catch((err) => api.errorHandler(err))
-      .finally(() => popupAdd.hideLoadingText());
-  },
-  popup: popupTypeAdd
-});
-
-const popupEdit = new PopupWithForm({
-  handleFormSubmit: (inputValues) => {
-    userInfo.setUserInfo(inputValues)
-      .then(() => popupEdit.close())
-      .catch((err) => api.errorHandler(err))
-      .finally(() => popupEdit.hideLoadingText());
-  },
-  popup: popupTypeEdit
-});
+  settingsForCards.cardContainerSelector
+);
 
 function openPopupChangeAvatar() {
   popupChangeAvatar.open();
@@ -153,12 +162,8 @@ function openPopupAdd() {
 
 function openPopupEdit() {
   userInfo.getUserInfo()
-    .then(({ about, name }) => {
-      inputEditAbout.value = about
-      inputEditName.value = name;
-      buttonEdit.removeAttribute('disabled');
-      buttonEdit.classList.remove(settingsForValidation.inactiveButtonClass);
-
+    .then((userData) => {
+      popupEdit.setInputValues(userData);
       popupEdit.open();
     })
     .catch((err) => api.errorHandler(err));
@@ -173,7 +178,7 @@ const changeVisibility = (isLoading, element) => {
 }
 
 function popupChangeDisplay () {
-  const popupList = document.querySelectorAll(popupSelectors.popup);
+  const popupList = document.querySelectorAll(settingsForPopup.popupSelector);
   popupList.forEach((popup) => {
     popup.classList.add(visibilityElements.displayFlexClass);
   });
@@ -189,14 +194,14 @@ formList.forEach((formElement) => {
 })
 
 Promise.all([userInfo.getUserInfo(), api.getInitialCards()])
-  .then(([info, cards]) => {
-    sessionStorage.setItem('userId', info._id)
+  .then(([userData, cards]) => {
+    sessionStorage.setItem('userId', userData._id)
     userId = sessionStorage.getItem('userId');
 
-    userInfo.changeUserAvatar(info.avatar);
-    userInfo.changeUserInfo(info.about, info.name);
+    userInfo.changeUserAvatar(userData.avaLinkInput);
+    userInfo.changeUserInfo(userData.aboutInput, userData.nameInput);
 
-    renderCard(cards);
+    cardList.renderItems(cards.reverse());
 
     changeVisibility(false, userProfile);
     changeVisibility(false, imageBoardList);

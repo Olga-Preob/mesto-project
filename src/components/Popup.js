@@ -1,8 +1,8 @@
-import { settingsForPopup } from '../utils/constants.js';
-
 export default class Popup {
-  constructor(popup) {
+  constructor(popup, settings) {
     this._popup = popup;
+    this._settings = settings;
+    this.setEventListeners();
   }
 
   _handleEscClose = (evt) => {
@@ -12,24 +12,23 @@ export default class Popup {
   }
 
   open() {
-    this.setEventListeners();
-    this._popup.classList.add(settingsForPopup.openedClass);
+    this._popup.classList.add(this._settings.openedClass);
     document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {
-    this._popup.classList.remove(settingsForPopup.openedClass);
+    this._popup.classList.remove(this._settings.openedClass);
     this._removeEventListeners();
   }
 
-  setEventListeners() {
-    const popupButtonClose = this._popup.querySelector(settingsForPopup.closeButtonSelector);
+  setEventListeners = () => {
+    const popupButtonClose = this._popup.querySelector(this._settings.closeButtonSelector);
     popupButtonClose.addEventListener('click', () => {
       this.close();
     });
 
     this._popup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains(settingsForPopup.popupClass)) {
+      if (evt.target.classList.contains(this._settings.popupClass)) {
         this.close();
       }
     });

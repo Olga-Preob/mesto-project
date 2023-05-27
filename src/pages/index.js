@@ -199,8 +199,7 @@ formList.forEach((formElement) => {
 
 Promise.all([userInfo.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    sessionStorage.setItem('userId', userData._id)
-    userId = sessionStorage.getItem('userId');
+    userId = userData._id;
 
     userInfo.changeUserAvatar(userData.avaLinkInput);
     userInfo.changeUserInfo(userData.aboutInput, userData.nameInput);

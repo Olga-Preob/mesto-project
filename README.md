@@ -16,7 +16,7 @@ email: akhorkb@yandex.ru
 git: https://github.com/nordpage
 
 ### GitHub Pages
-[GitHub Pages Ольга](https://olga-preob.github.io/mesto-project-ghpages/)    
+[GitHub Pages Ольга](https://olga-preob.github.io/mesto-project/)    
 [GitHub Pages Анастасия](https://nordpage.github.io/mesto-project/)
 
 ### Авторы

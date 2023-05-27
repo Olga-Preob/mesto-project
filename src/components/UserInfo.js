@@ -1,32 +1,31 @@
 export default class UserInfo {
-  constructor(avatar, name, status, {requestGetUser, requestSetInfo, requestUploadAvatar}) {
-    this._avatar = avatar;
-    this._name = name;
-    this._status = status;
-
-    this._requestGetUser = requestGetUser;
-    this._requestSetInfo = requestSetInfo;
-    this._requestUploadAvatar = requestUploadAvatar;
+  constructor({ requestGetUserInfo, requestSetUserAvatar, requestSetUserInfo }, avatar, name, about) {
+    this._userAvatar = avatar;
+    this._userName = name;
+    this._userAbout = about;
+    this._requestGetUserInfo = requestGetUserInfo;
+    this._requestSetUserAvatar = requestSetUserAvatar;
+    this._requestSetUserInfo = requestSetUserInfo;
   }
 
   changeUserAvatar(link) {
-    this._avatar.src = link;
+    this._userAvatar.src = link;
   }
 
   changeUserInfo(about, name) {
-    this._status.textContent = about;
-    this._name.textContent = name;
+    this._userAbout.textContent = about;
+    this._userName.textContent = name;
   }
 
   getUserInfo() {
-    return this._requestGetUser();
+    return this._requestGetUserInfo();
   }
 
   setUserAvatar({ avaLinkInput }) {
-    return this._requestUploadAvatar(avaLinkInput);
+    return this._requestSetUserAvatar(avaLinkInput);
   }
 
   setUserInfo({ nameInput, aboutInput }) {
-    return this._requestSetInfo({ nameInput, aboutInput });
+    return this._requestSetUserInfo({ nameInput, aboutInput });
   }
 }

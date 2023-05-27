@@ -1,12 +1,12 @@
-import './pages/index.css';
-import Api from "./components/Api";
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import PopupWithConfirm from './components/PopupWithConfirm.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import Section from './components/Section.js';
-import UserInfo from './components/UserInfo.js';
+import './index.css';
+import Api from '../components/Api.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 import {
   popupTypeAdd,
   popupTypeEdit,
@@ -26,7 +26,7 @@ import {
   userAvatar,
   userName,
   userAbout
-} from './utils/constants.js';
+} from '../utils/constants.js';
 
 
 let userId;
@@ -39,8 +39,8 @@ const api = new Api({
   }
 });
 
-const userInfo = new UserInfo(userAvatar, userName, userAbout, {
-  requestGetUser: () => {
+const userInfo = new UserInfo({
+  requestGetUserInfo: () => {
     return api.getUserInfo()
       .then((res) => {
         const userData = {
@@ -52,18 +52,36 @@ const userInfo = new UserInfo(userAvatar, userName, userAbout, {
         return userData;
       })
       .catch((err) => api.errorHandler(err));
-  },
-  requestSetInfo: ({ nameInput, aboutInput }) => {
-    return api.updateUserInfo(nameInput, aboutInput)
-      .then((res) => userInfo.changeUserInfo(res.about, res.name))
-      .catch((err) => api.errorHandler(err));
-  },
-  requestUploadAvatar: (link) => {
-    return api.uploadAvatarImage(link)
+    },
+  requestSetUserAvatar: (link) => {
+    return api.editUserAvatar(link)
       .then((res) => userInfo.changeUserAvatar(res.avatar))
       .catch((err) => api.errorHandler(err));
-  }
-});
+    },
+  requestSetUserInfo: ({ nameInput, aboutInput }) => {
+    return api.editUserInfo(nameInput, aboutInput)
+      .then((res) => userInfo.changeUserInfo(res.about, res.name))
+      .catch((err) => api.errorHandler(err));
+    }
+  },
+  userAvatar,
+  userName,
+  userAbout
+);
+
+function createCard(item) {
+  const card = new Card(cardHandlers, item, userId, settingsForCards);
+  const cardElement = card.generate();
+  return cardElement;
+}
+
+const cardList = new Section({
+  renderer: (item) => {
+    cardList.setItem(createCard(item));
+    }
+  },
+  settingsForCards.cardContainerSelector
+);
 
 const popupChangeAvatar = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
@@ -89,7 +107,7 @@ const popupEdit = new PopupWithForm({
 
 const popupAdd = new PopupWithForm({
   handleFormSubmit: (inputValues) => {
-    return api.addCard(inputValues.imgNameInput, inputValues.imgLinkInput)
+    return api.addNewCard(inputValues.imgNameInput, inputValues.imgLinkInput)
       .then((cardInfo) => {
         cardList.renderItems([cardInfo]);
         popupAdd.close();
@@ -124,7 +142,7 @@ const cardHandlers = {
   },
 
   handleLikeClick: (method, cardId, likeButton, likeCounter) => {
-    api.likes(method, cardId)
+    api.sendLike(method, cardId)
       .then((cardArr) => {
         likeButton.classList.toggle(settingsForCards.likeActiveClass);
         likeCounter.textContent = cardArr.likes.length;
@@ -137,20 +155,6 @@ const cardHandlers = {
     popupWithConfirm.open();
   },
 }
-
-function createCard(item) {
-  const card = new Card(cardHandlers, item, userId, settingsForCards);
-  const cardElement = card.generate();
-  return cardElement;
-}
-
-const cardList = new Section({
-  renderer: (item) => {
-    cardList.setItem(createCard(item));
-    }
-  },
-  settingsForCards.cardContainerSelector
-);
 
 function openPopupChangeAvatar() {
   popupChangeAvatar.open();
@@ -209,5 +213,3 @@ Promise.all([userInfo.getUserInfo(), api.getInitialCards()])
   .catch((err) => api.errorHandler(err));
 
 popupChangeDisplay();
-
-export { userId }
